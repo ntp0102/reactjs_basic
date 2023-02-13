@@ -1,11 +1,12 @@
 import "./Nav.css";
 
+
 const Nav = () => {
   return (
     <div>
       <ul>
         <li>
-          <a class="active" href="#home">
+          <a  className="active-element" href="#home">
             Home
           </a>
         </li>

@@ -3,7 +3,8 @@ import "./App.css";
 // import TodoList from "./components/TodoList";
 import Nav from "./views/Nav";
 import Todo from "./views/Todo";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Covid from "./components/Covid";
 
 //jsx
 const App = () => {
@@ -17,12 +18,17 @@ const App = () => {
   const [action, setAction] = useState("");
 
   const DeleteDataTodo = (id) => {
-    console.log(id);
-
     let currentTodo = listTodo.filter((todo) => todo.id !== id);
-    console.log(currentTodo);
+
     setListTodo(currentTodo);
   };
+
+  useEffect(() => {
+    console.log("run");
+  }, [action]);
+  useEffect(() => {
+    console.log("run");
+  }, [listTodo]);
 
   function handleClickBtnAction(event) {
     if (!action) {
@@ -52,7 +58,7 @@ const App = () => {
         <img src={logo} className="App-logo" alt="logo" />
         {/* <TodoList /> */}
 
-        <Todo
+        {/* <Todo
           todos={listTodo}
           title="app todo"
           deleteDataTodo={DeleteDataTodo}
@@ -74,7 +80,9 @@ const App = () => {
         ></input>
         <button type="submit" onClick={(event) => handleClickBtnAction(event)}>
           Click me
-        </button>
+        </button> */}
+
+        <Covid/>
       </header>
     </div>
   );

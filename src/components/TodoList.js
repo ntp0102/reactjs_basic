@@ -27,10 +27,15 @@ const TodoList = () => {
     //hook not merge state
     console.log("check action", typeof { action });
     console.log(listTodo);
-    let newtodo = { id: "a", title: action };
+    let newtodo = { id: Math.floor(Math.random() * 1000 + 1), title: action };
     setListTodo([...listTodo, newtodo]);
     setAction("");
   }
+
+  const handleDelete = (id) => {
+    let currentTodo = listTodo.filter((todo) => todo.id !== id);
+    setListTodo(currentTodo);
+  };
 
   return (
     <div>
@@ -57,7 +62,6 @@ const TodoList = () => {
         type="text"
         onChange={(event) => {
           console.log(event);
-          // console.log('>>>check value action', {action})
           setAction(event.target.value);
         }}
       ></input>
@@ -67,8 +71,15 @@ const TodoList = () => {
       <div className="todo-container">
         {listTodo.map((item, index) => {
           return (
-            <li className="todo-child" key={item.id}>
-              {item.title}
+            <li style={{ all: "initial" }} className="todo-child" key={item.id}>
+              {item.title} &nbsp; &nbsp;
+              <span
+                onClick={() => handleDelete(item.id)}
+                style={{ cursor: "pointer" }}
+              >
+                x
+              </span>
+              <br />
             </li>
           );
         })}

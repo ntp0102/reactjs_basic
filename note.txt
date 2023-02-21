@@ -1,0 +1,2 @@
+componentDidMount(): ham nay se chay sau khi thuc hien render lan dau
+de su dung bootstrap, khai bao trong file index.scss

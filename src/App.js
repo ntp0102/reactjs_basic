@@ -1,10 +1,15 @@
 import logo from "./logo.svg";
 import "./App.css";
-// import TodoList from "./components/TodoList";
+import TodoList from "./components/TodoList";
 import Nav from "./views/Nav";
 import Todo from "./views/Todo";
+import Blog from "./views/Blog";
 import React, { useState, useEffect } from "react";
 import Covid from "./components/Covid";
+import DetailBlog from "./views/DetailBlog";
+import AddNewBlog from "./views/AddNewBlog";
+import { Countdown, NewCountDown } from "./views/Countdown";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 //jsx
 const App = () => {
@@ -19,72 +24,57 @@ const App = () => {
 
   const DeleteDataTodo = (id) => {
     let currentTodo = listTodo.filter((todo) => todo.id !== id);
-
     setListTodo(currentTodo);
   };
 
-  useEffect(() => {
-    console.log("run");
-  }, [action]);
-  useEffect(() => {
-    console.log("run");
-  }, [listTodo]);
+  // useEffect(() => {
+  //   console.log("run");
+  // }, [action]);
+  // useEffect(() => {
+  //   console.log("run");
+  // }, [listTodo]);
 
-  function handleClickBtnAction(event) {
-    if (!action) {
-      alert("empty input");
-      return;
-    }
-    // if (listTodo.length === 4) {
-    //   console.log('check fc length 4')
-    //   listTodo.pop()
-    // }
-    //hook not merge state
-    console.log("check action", typeof { action });
-    console.log(listTodo);
-    let newtodo = {
-      id: Math.floor(Math.random() * 100 + 1),
-      title: action,
-      author: "phuc",
-    };
-    setListTodo([...listTodo, newtodo]);
-    setAction("");
-  }
+  const onTimesup = () => {
+    // alert("Het gio");
+  };
 
   return (
-    <div className="App" style={{ textTransform: "uppercase" }}>
-      <header className="App-header">
-        <Nav />
-        <img src={logo} className="App-logo" alt="logo" />
-        {/* <TodoList /> */}
-
-        {/* <Todo
-          todos={listTodo}
-          title="app todo"
-          deleteDataTodo={DeleteDataTodo}
-        />
-
-        <Todo
-          todos={listTodo.filter((item) => item.author === "phuc")}
-          title="phuc todo"
-          deleteDataTodo={DeleteDataTodo}
-        />
-        <input
-          value={action}
-          type="text"
-          onChange={(event) => {
-            console.log(event);
-            // console.log('>>>check value action', {action})
-            setAction(event.target.value);
-          }}
-        ></input>
-        <button type="submit" onClick={(event) => handleClickBtnAction(event)}>
-          Click me
-        </button> */}
-
-        <Covid/>
-      </header>
-    </div>
+    <Router>
+      <div className="App" style={{ textTransform: "uppercase" }}>
+        <header className="App-header">
+          <Nav />
+          <img src={logo} className="App-logo" alt="logo" />
+        </header>
+        <div>
+          <Switch>
+            <Route path="/" exact>
+              <Covid />
+            </Route>
+            <Route path="/timer">
+              <Countdown onTimesup={onTimesup} />
+              <NewCountDown onTimesup={onTimesup} />
+            </Route>
+            <Route path="/todo">
+              <Todo
+                todos={listTodo.filter((item) => item.author === "phuc")}
+                title="phuc todo"
+                deleteDataTodo={DeleteDataTodo}
+              />
+              <TodoList />
+            </Route>
+            <Route path="/blog" exact>
+              <Blog />
+            </Route>
+            <Route path="/blog/:id">
+              <DetailBlog />
+            </Route>
+            <Route path="/add-new-blog">
+              <AddNewBlog />
+            </Route>
+          </Switch>
+        </div>
+      </div>
+    </Router>
   );
 };
 

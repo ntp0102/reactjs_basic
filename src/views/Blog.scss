@@ -1,0 +1,43 @@
+.btn-add-new-container {
+  margin-top: 10px;
+
+  .btn-add-new-blog {
+    border: 2px solid rgb(241, 9, 9);
+    margin-top: 10px;
+    cursor: pointer;
+    background-color: rgb(255, 132, 0);
+    text-decoration: "none";
+    color: #fff;
+  }
+}
+
+.blog-container {
+  all: "initial";
+
+  text-transform: lowercase;
+  margin: 0 15%;
+  width: 80%;
+  // font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  text-align: left;
+
+  .id {
+    width: 20%;
+  }
+  .title {
+    width: 45%;
+  }
+  .body {
+    width: 20%;
+  }
+
+  .blog-single {
+    color: blue;
+
+    th {
+      border: 1px solid #ddd;
+      padding: 8px;
+      font-size: 15px;
+    }
+  }
+}
